@@ -19,11 +19,11 @@ function preload() {
   // load image
   spriteImage = loadImage("assets/sprite.png");
   coinImage = loadImage("assets/coins.png");
+  singleCoinImage = loadImage("assets/singleCoin.png")
   tile = loadImage("assets/tile.png");
   sharkImage = loadImage("assets/requin.png");
   fishImage = loadImage("assets/poisson1.png"),
   orqueImage = loadImage("assets/orque.png"),
-  realfishImage = loadImage("assets/realfish.png"),
 
 
 
@@ -91,7 +91,7 @@ function setup() {
 
   zombies = new Group();
   for(let j=0; j<5; j++){
-    let zombie = createSprite(random(0, 50), random(0,10), 1, 1)
+    let zombie = createSprite(random(5, 50), random(0,30), 1, 1)
     zombie.spriteSheet = poZom;
     zombie.rotationLock = true
     // zombie.collider = "none"
@@ -140,8 +140,8 @@ function setup() {
 
 
   bombs = new Group();
-  for(let j=0; j<5; j++){
-    let bomb = createSprite(random(0,50), random(0, 30), 1, 1)
+  for(let j=0; j<15; j++){
+    let bomb = createSprite(random(5,50), random(0, 30), 1, 1)
     bomb.spriteSheet = bombImage; 
     bomb.rotationLock = true
     bomb.collider = "none"
@@ -162,7 +162,7 @@ function setup() {
 
   coins = new Group();
   for(let j=0; j<5; j++){
-    let coin = createSprite(random(0, 50), random(0,30), 1, 1)
+    let coin = createSprite(random(5, 50), random(0,30), 1, 1)
     coin.spriteSheet = coinImage;
     coin.rotationLock = true
     coin.collider = "none"
@@ -180,16 +180,9 @@ function setup() {
   }
   fish.overlapping(coins, collect);
 
-
-  poissons = [
-    fishImage,
-    orqueImage,
-    realfishImage,
-  ]
-
   otherFishs = new Group();
   for(let j=0; j<5; j++){
-    let otherFish = createSprite(random(0,50), random(0, 30), 1, 1)
+    let otherFish = createSprite(random(5,50), random(0, 30), 1, 1)
     otherFish.spriteSheet = fishImage; 
     otherFish.rotationLock = true
     otherFish.collider = "none"
@@ -208,7 +201,7 @@ function setup() {
 
     otherFish.changeAni("stand")
 
-    let otherOrque = createSprite(random(0,50), random(0, 30), 1, 1)
+    let otherOrque = createSprite(random(5,50), random(0, 30), 1, 1)
     otherOrque.spriteSheet = orqueImage; 
     otherOrque.rotationLock = true
     otherOrque.collider = "none"
@@ -227,7 +220,7 @@ function setup() {
 
     otherOrque.changeAni("stand");
 
-    let otherShark = createSprite(random(0,50), random(0, 30), 1, 1)
+    let otherShark = createSprite(random(5,50), random(0, 30), 1, 1)
     otherShark.spriteSheet = sharkImage; 
     otherShark.rotationLock = true
     otherShark.collider = "none"
@@ -249,30 +242,37 @@ function setup() {
   }
   fish.overlapping(otherFishs, eat)
 
+
+
+  
+
+
 }
 
 function collect(fish, coin) {
-  coin.remove();
-  fish.scale += 0.5;
-  coinCount += 1;
+  coin.x = random(5,50)
+  coin.y = random(0,30)
+coinCount += 1;
 }
 
 function damage(fish, bomb){
   health -= 10;
-  bomb.remove();
-}
+  bomb.x = random(5,50)
+  bomb.y = random(0,30)}
 
 function eat(fish, otherFish){
   if( otherFish.width > fish.width){
     health -= 10;
-    otherFish.x = random(0,50)
-    otherFish.y = random(0,20)
+    otherFish.x = random(5,50)
+    otherFish.y = random(0,30)
 
   }
   else {
-    fish.scale += otherFish.scale
-    otherFish.x = random(0,50)
-    otherFish.y = random(0,20)
+    if( fish.scale <= 2) {
+      fish.scale += otherFish.scale
+    }
+    otherFish.x = random(5,50)
+    otherFish.y = random(0,0)
     if(health != 100){
       health += 10;
     }
@@ -310,11 +310,15 @@ function updateFood(){
 function draw() {
   background(bg);
 
-  updateFood(food, maxFood);
+  if( food > 0){
+    setTimeout('10000', 10000);
+    food -= 0.05
+  }
+
+
+  updateFood(maxFood, maxFood);
   updateHealth(health, maxHealth);
 
-  textSize(50)
-  text(coinCount + coinImage, 400, 15)
 
   zombies.forEach(zombie => {
     let dir = p5.Vector.sub(fish.position, zombie.position);
@@ -340,4 +344,8 @@ function draw() {
 
   fish.layer = 2;
 
+  textSize(40)
+  fill('yellow')
+  text(coinCount, 50, 100)
+  image(singleCoinImage, 75, 60, 50, 50);
 }
