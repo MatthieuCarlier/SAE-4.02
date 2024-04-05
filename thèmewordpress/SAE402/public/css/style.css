@@ -1,0 +1,147 @@
+@font-face {
+  font-family: bouquet;
+  src: url(font/BouquetRegular.woff);
+}
+
+/* --- Reset CSS --- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin-block-end: 0;
+}
+
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  margin-top: -50px;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+main {
+  margin-top: -48px;
+  background-color: #03045e;
+  z-index: -100;
+  position: relative;
+}
+
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+  line-height: 1.1;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+  color: currentColor;
+}
+
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+textarea:not([rows]) {
+  min-height: 10em;
+}
+
+:target {
+  scroll-margin-block: 5ex;
+}
+
+/* --- Navigation --- */
+.navbar {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  top: 0;
+  font-family: sans-serif;
+  transition: all 0.3s ease;
+  z-index: 4;
+  background-color: transparent;
+}
+
+.logo {
+  height: 3rem;
+   z-index: 5;
+}
+
+.navbar.sticky {
+  padding: 1rem 2rem;
+  background: #0077b6;
+}
+
+.menu__li {
+  display: inline-block;
+}
+
+.menu {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-btn {
+  color: #fff;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.btn_jeu {
+  background-color: #00bbd1;
+  border-radius: 0.5rem;
+  padding: 0.2rem 1rem;
+}
+
+.fontpage {
+  font-family: bouquet;
+}
